@@ -97,3 +97,34 @@ class Pro004Solution:
         :param nums2: list[int]
         :return: float
         """
+        def get_kth_smallest(a_start, b_start, k):
+            if k <= 0 or k > len(nums1) - a_start + len(nums2) - b_start:
+                raise ValueError("The input value error!")
+            if len(nums1) == a_start:
+                return nums2[b_start + k - 1]
+            if len(nums2) == b_start:
+                return nums1[a_start + k - 1]
+            if k == 1:
+                return min(nums1[a_start], nums2[b_start])
+
+            mid_a, mid_b = float('inf'), float('inf')
+            if k//2 <= len(nums1) - a_start:
+                mid_a = nums1[a_start + k // 2 - 1]
+            if k//2 <= len(nums2) - b_start:
+                mid_b = nums2[b_start + k // 2 - 1]
+
+            if mid_a < mid_b:
+                return get_kth_smallest(a_start + k // 2, b_start, k - k // 2)
+            else:
+                return get_kth_smallest(a_start, b_start + k // 2, k - k // 2)
+
+        right = get_kth_smallest(0, 0, 1 + (len(nums1) + len(nums2))//2)
+        if (len(nums1) + len(nums2)) % 2 == 1:
+            return right
+        else:
+            left = get_kth_smallest(0, 0, (len(nums1) + len(nums2))//2)
+            return (left + right)/2.0
+
+num1 = [1,3,5]
+num2 = [2,4]
+print(Pro004Solution.find_median_sorted_arrays(num1, num2))
