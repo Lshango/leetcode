@@ -51,6 +51,7 @@ class Pro002Solution:
             carry //= 10
         return r_val.next
 
+
 '''The 3rd problem from leetcode, (medium)'''
 class Pro003Solution:
     @classmethod
@@ -125,6 +126,87 @@ class Pro004Solution:
             left = get_kth_smallest(0, 0, (len(nums1) + len(nums2))//2)
             return (left + right)/2.0
 
-num1 = [1,3,5]
-num2 = [2,4]
-print(Pro004Solution.find_median_sorted_arrays(num1, num2))
+
+# The 6th problem from leetcode, (medium) zigzag;
+class pro006Solution(object):
+    @classmethod
+    def convert(cls, s, rowNums):
+        """
+        :param s: string
+        :param rowNums: int
+        :return: string
+        """
+        if rowNums == 1:
+            return s
+
+        zigzag = [[] for _ in range(rowNums)]
+        row = 0
+        direction = -1
+        for c in s:
+            zigzag[row].append(c)
+            if row == 0 or row == rowNums - 1:
+                direction = -direction
+            row += direction
+        return "".join([c for _ in zigzag for c in _])
+# print(pro006Solution.convert("LEETCODEISHIRING", 3))
+
+
+# The 7th problem from leetcode. (easy) reverse the signed int;
+class pro007Solution(object):
+    @classmethod
+    def reverse(cls, x):
+        """
+        :param x: int
+        :return: int
+        """
+        neg = x < 0
+        x = abs(x)
+        result = 0
+        while x:
+            result = result * 10 + x % 10
+            x = x // 10
+        if result > 2**31 - 1:
+            return 0
+        return result if not neg else -result
+# print(pro007Solution.reverse(-123))
+
+
+# The 8th problem from leetcode, (medium) atoi;
+class pro008Solution(object):
+    @classmethod
+    def myAtoi(cls, s):
+        """
+        :param s: string
+        :return: int
+        """
+        s = s.strip()
+        neg = False
+        if s and s[0] == '-':
+            neg = True
+        if s and (s[0] == '+' or s[0] == '-'):
+            s = s[1:]
+
+        digit = {_ for _ in '0123456789'}
+        result = 0
+        for c in s:
+            if c not in digit:
+                break
+            result = result * 10 + int(c)
+
+        if neg:
+            result = -result
+        return max(min(result, 2 ** 31 - 1), -2 ** 31)
+# print(pro008Solution.myAtoi('-1234'))
+
+
+# The 9th problem from leetcode, (easy) isPalindrome;
+class pro009Solution(object):
+    @classmethod
+    def isPalindrome(cls, x):
+        """
+        :param x: int
+        :return: bool
+        """
+        str0 = str(x)
+        str1 = str0[::-1]
+        return str0 == str1
