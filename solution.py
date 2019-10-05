@@ -210,3 +210,84 @@ class pro009Solution(object):
         str0 = str(x)
         str1 = str0[::-1]
         return str0 == str1
+
+
+# The 11th problem from leetcode, (medium) maxArea;
+class Pro011Solution(object):
+    @classmethod
+    def max_area(cls, height):
+        """
+        :param height: list[int]
+        :return: int
+        """
+        area = 0
+        left, right = 0, len(height) - 1
+        while left < right:
+            area = max(area, (right - left)*min(height[left], height[right]))
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        return area
+
+
+# The 12th problem from leetcode, (medium) intToRoman;
+class Pro012Solution(object):
+    @classmethod
+    def int_to_roman(cls, num):
+        """
+        :param num: integer
+        :return: string
+        """
+        mapped = {1000: 'M', 900: 'CM', 500: 'D', 400: 'CD',
+                  100: 'C', 90: 'XC', 50: 'L', 40: 'XL',
+                  10: 'X', 9: 'IX', 5: 'V', 4: 'IV', 1: 'I'}
+        roman = ''
+        for i, s in mapped.items():
+            while i <= num:
+                roman += s
+                num -= i
+        return roman
+# print(Pro012Solution.int_to_roman(1994))
+
+
+# The 13th problem from leetcode, (medium) romanToInt;
+class Pro013Solution(object):
+    @classmethod
+    def roman_to_int(cls, s):
+        """
+        :param s: string
+        :return: integer
+        """
+        mapped = {1000: 'M', 900: 'CM', 500: 'D', 400: 'CD',
+                  100: 'C', 90: 'XC', 50: 'L', 40: 'XL',
+                  10: 'X', 9: 'IX', 5: 'V', 4: 'IV', 1: 'I'}
+        num = 0
+        for i, st in mapped.items():
+            while s[:len(st)] == st:
+                num += i
+                s = s[len(st):]
+        return num
+# print(Pro013Solution.roman_to_int('MCMXCIV'))
+
+
+# The 14th problem from leetcode, (medium) longestCommonPrefix;
+class Pro014Solution(object):
+    @classmethod
+    def longest_common_prefix(cls, strs):
+        """
+        :param strs: list[string]
+        :return: string
+        """
+        if not strs:
+            return ''
+
+        strs.sort()
+        first = strs[0]
+        last = strs[-1]
+        i = 0
+        while i < len(first) and i < len(last) and first[i] == last[i]:
+            i += 1
+        return first[:i]
+# strs = ['flsse','flseq', 'flsqwrrete']
+# print(Pro014Solution.longest_common_prefix(strs))
