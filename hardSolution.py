@@ -8,6 +8,30 @@ class Pro005Solution(object):
         """
         return s
 
+    @classmethod
+    def longest_palin(cls, s):
+        """
+        :param s: string
+        :return: string
+        """
+        def center_expand(left, right):
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return right - left - 1
+
+        start = end = 0
+        for i in range(len(s)):
+            len1 = center_expand(i, i)                   # the length is odd，aba
+            len2 = center_expand(i, i + 1)               # the length is dou，abba
+            maxlen = max(len1, len2)
+            if maxlen > end - start + 1:
+                start = i - (maxlen - 1) // 2
+                end = i + maxlen // 2
+        return s[start: end + 1]
+
+print(Pro005Solution.longest_palin("gphyvqruxjmwhonjjr"))
+
 
 # The 10th problem from leetcode, (hard) regular match;
 class Pro010Solution(object):

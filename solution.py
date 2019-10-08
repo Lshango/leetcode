@@ -4,7 +4,7 @@ Author: lshango
 Date: 20190905
 """
 
-'''The 1st problem from leetcode, (easy)'''
+# The 1st problem from leetcode, (easy)
 class Pro001Solution:
     @classmethod
     def two_sum(cls, nums, target):
@@ -22,7 +22,7 @@ class Pro001Solution:
         return []
 
 
-'''The 2nd problem from leetcode, (medium)'''
+# The 2nd problem from leetcode, (medium)
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -52,7 +52,7 @@ class Pro002Solution:
         return r_val.next
 
 
-'''The 3rd problem from leetcode, (medium)'''
+# The 3rd problem from leetcode, (medium)
 class Pro003Solution:
     @classmethod
     def length_of_longest_substring(cls, s):
@@ -89,7 +89,7 @@ class Pro003Solution:
         return max_length
 
 
-'''The 4th problem from leetcode, (hard)'''
+# The 4th problem from leetcode, (hard)
 class Pro004Solution:
     @classmethod
     def find_median_sorted_arrays(cls, nums1, nums2):
@@ -128,7 +128,7 @@ class Pro004Solution:
 
 
 # The 6th problem from leetcode, (medium) zigzag;
-class pro006Solution(object):
+class Pro006Solution(object):
     @classmethod
     def convert(cls, s, rowNums):
         """
@@ -148,11 +148,11 @@ class pro006Solution(object):
                 direction = -direction
             row += direction
         return "".join([c for _ in zigzag for c in _])
-# print(pro006Solution.convert("LEETCODEISHIRING", 3))
+# print(Pro006Solution.convert("LEETCODEISHIRING", 3))
 
 
 # The 7th problem from leetcode. (easy) reverse the signed int;
-class pro007Solution(object):
+class Pro007Solution(object):
     @classmethod
     def reverse(cls, x):
         """
@@ -168,13 +168,13 @@ class pro007Solution(object):
         if result > 2**31 - 1:
             return 0
         return result if not neg else -result
-# print(pro007Solution.reverse(-123))
+# print(Pro007Solution.reverse(-123))
 
 
 # The 8th problem from leetcode, (medium) atoi;
-class pro008Solution(object):
+class Pro008Solution(object):
     @classmethod
-    def myAtoi(cls, s):
+    def my_atoi(cls, s):
         """
         :param s: string
         :return: int
@@ -196,13 +196,13 @@ class pro008Solution(object):
         if neg:
             result = -result
         return max(min(result, 2 ** 31 - 1), -2 ** 31)
-# print(pro008Solution.myAtoi('-1234'))
+# print(Pro008Solution.my_atoi('-1234'))
 
 
 # The 9th problem from leetcode, (easy) isPalindrome;
-class pro009Solution(object):
+class Pro009Solution(object):
     @classmethod
-    def isPalindrome(cls, x):
+    def is_palindrome(cls, x):
         """
         :param x: int
         :return: bool
@@ -291,3 +291,4 @@ class Pro014Solution(object):
         return first[:i]
 # strs = ['flsse','flseq', 'flsqwrrete']
 # print(Pro014Solution.longest_common_prefix(strs))
+
