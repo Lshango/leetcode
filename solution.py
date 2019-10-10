@@ -292,3 +292,66 @@ class Pro014Solution(object):
 # strs = ['flsse','flseq', 'flsqwrrete']
 # print(Pro014Solution.longest_common_prefix(strs))
 
+
+# The 16th problem from leetcode, (medium) threeSumClosest;
+class Pro016Solution(object):
+    @classmethod
+    def three_sum_closest(cls, nums, target):
+        """
+        :param nums: List[int]
+        :param target: int
+        :return: int
+        """
+        nums.sort()
+        i = 0
+        delta = float('inf')
+        result = 0
+        while i < len(nums):
+            j = i + 1
+            k = len(nums) - 1
+            while k > j:
+                d = nums[i] + nums[j] + nums[k] - target
+                if abs(d) < delta:
+                    delta = abs(d)
+                    result = nums[i] + nums[j] + nums[k]
+                if d == 0:
+                    return target
+                elif d > 0:
+                    k -= 1
+                    while k > j and nums[k] == nums[k + 1]:
+                        k -= 1
+                else:
+                    j += 1
+                    while k > j and nums[j] == nums[j - 1]:
+                        j += 1
+            i += 1
+            while i < len(nums) - 2 and nums[i] == nums[i - 1]:
+                i += 1
+        return result
+#print(Pro016Solution.three_sum_closest([-1,2,1,4], 1))
+
+
+# The 17th problem from leetcode, (medium) letterCombinations;
+class Pro017Solution:
+    @classmethod
+    def letter_combinations(cls, digits):
+        """
+        :param digits: string
+        :return: List[string]
+        """
+        res = []
+        table = {'2': "abc", '3': "def", '4': "ghi", '5': "jkl", '6': "mno", '7': "pqrs", '8': "tuv", '9': "wxyz"}
+
+        def dfs(i, string):
+            if i == len(digits) - 1:
+                for ch in table[digits[i]]:
+                    res.append(string+ch)
+            else:
+                for ch in table[digits[i]]:
+                    dfs(i + 1, string + ch)
+
+        if digits == "":
+            return res
+        dfs(0, "")
+        return res
+print(Pro017Solution.letter_combinations("234"))
