@@ -354,4 +354,101 @@ class Pro017Solution:
             return res
         dfs(0, "")
         return res
-print(Pro017Solution.letter_combinations("234"))
+# print(Pro017Solution.letter_combinations("234"))
+
+
+# The 18th problem from leetcode, (medium) fourSum;
+class Pro018Solution(object):
+    @classmethod
+    def four_sum(cls, nums, target):
+        """
+        :param nums: List[int]
+        :param target:  int
+        :return: List[List[int]]
+        """
+        nums.sort()
+        n = 0
+        result = []
+        while n < len(nums):
+            three_sum = target - nums[n]
+            i = n + 1
+            while i < len(nums) - 2:
+                j = i + 1
+                k = len(nums) - 1
+                while k > j:
+                    d = nums[i] + nums[j] + nums[k]
+                    if d == three_sum:
+                        result.append([nums[n], nums[i], nums[j], nums[k]])
+                        k -= 1
+                        while k > j and nums[k] == nums[k + 1]:
+                            k -= 1
+                        j += 1
+                        while k > j and nums[j] == nums[j - 1]:
+                            j += 1
+                    elif d > three_sum:
+                        k -= 1
+                        while k > j and nums[k] == nums[k + 1]:
+                            k -= 1
+                    else:
+                        j += 1
+                        while k > j and nums[j] == nums[j - 1]:
+                            j += 1
+                i += 1
+                while i < len(nums) - 2 and nums[i] == nums[i - 1]:
+                    i += 1
+            n += 1
+            while n < len(nums) - 3 and nums[n] == nums[n - 1]:
+                n += 1
+        return result
+#print(Pro018Solution.four_sum([1, 0, -1, 0, -2, 2], 0))
+
+
+# The 19th problem from leetcode, (medium) removeNthFromEnd;
+class Pro019Solution(object):
+    @classmethod
+    def remove_nth_from_end(cls, head, n):
+        """
+        :param head: ListNde
+        :param n: int
+        :return: ListNode
+        """
+        pre = end = ListNode(None)
+        pre.next = head
+        end.next = head
+        dlt_node = end
+        for i in range(n):
+            end = end.next
+
+        while end.next:
+            end = end.next
+            dlt_node = dlt_node.next
+        dlt_node.next = dlt_node.next.next
+        return pre.next
+
+
+# The 20th problem from leetcode, (easy) isValidParentheses;
+class Pro020Solution(object):
+    @classmethod
+    def is_valid(cls, s):
+        """
+        :param s: string
+        :return: bool
+        """
+        stack = []
+        left_p = '{[('
+        right_p = '}])'
+        for c in s:
+            if c in left_p:
+                stack.append(c)
+            else:
+                if len(stack) == 0:
+                    return False
+                if stack[-1] == left_p[right_p.find(c)]:
+                    stack.pop()
+                else:
+                    return False
+
+        if len(stack) == 0:
+            return True
+        return False
+print(Pro020Solution.is_valid('(])'))
