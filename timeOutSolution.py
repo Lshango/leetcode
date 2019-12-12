@@ -54,4 +54,6 @@ class Pro015Solution(object):
             while i < len(nums) - 2 and nums[i] == nums[i - 1]:
                 i += 1
         return result
+
+
 print(Pro015Solution.three_sum([-1, 0, 1, 2, -1, -4]))
